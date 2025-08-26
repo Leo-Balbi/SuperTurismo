@@ -1,0 +1,66 @@
+# ────────────────
+# Python
+# ────────────────
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# ────────────────
+# Entornos virtuales
+# ────────────────
+venv/
+.venv/
+env/
+ENV/
+*.env
+*.venv
+
+# ────────────────
+# IDEs y editores
+# ────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ────────────────
+# Archivos temporales del sistema
+# ────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ────────────────
+# Logs
+# ────────────────
+*.log
+
+# ────────────────
+# Archivos de Jupyter (si en algún momento usas notebooks)
+# ────────────────
+.ipynb_checkpoints
+
+# ────────────────
+# Datos locales / outputs generados
+# ────────────────
+data/*.xlsx
+data/*.csv
+data/*.tmp
+!data/example.xlsx   # <-- dejamos un archivo de ejemplo
+
+# ────────────────
+# Base de datos (si no quieres subir la real)
+# ────────────────
+data/superturismo.db
+
+# ────────────────
+# Archivos de Flet (caché o temporales)
+# ────────────────
+.flet/
