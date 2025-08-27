@@ -6,13 +6,11 @@ def main(page: ft.Page):
     page.title = "SuperTurismo"
     page.theme_mode = "dark"
     page.scroll = "auto"
-    page.window_width = 1200
-    page.window_height = 800
+    page.window_width = 1280
+    page.window_height = 840
 
-    # Inicializa DB
     init_db()
 
-    # Maneja navegación
     page.on_route_change = lambda e: route_change(page)
     page.go(page.route)
 

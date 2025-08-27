@@ -1,19 +1,23 @@
 import flet as ft
 import pandas as pd
-from app.components.navbuttons import nav_buttons
 
 def dashboard_view(page: ft.Page):
+    # Recupera los datos cargados desde Excel
     df = page.session.get("excel_data")
     if df is None:
-        df = pd.DataFrame()
+        df = pd.DataFrame()  # Evita errores si no hay datos
 
+    # Estado filtrado
     filtered_df = df.copy()
+
+    # Campo de búsqueda
     search_tf = ft.TextField(label="Buscar por Equipo o Piloto…", width=380, prefix_icon=ft.icons.SEARCH)
 
     def apply_search(e):
         nonlocal filtered_df
         query = search_tf.value.lower()
         if query and not df.empty:
+            # Filtra por columnas que existan
             cols = [c for c in ["equipo", "piloto"] if c in df.columns]
             if cols:
                 mask = df[cols].apply(lambda row: query in str(row).lower(), axis=1)
@@ -25,6 +29,8 @@ def dashboard_view(page: ft.Page):
         update_table()
 
     search_btn = ft.IconButton(ft.icons.FILTER_ALT, tooltip="Filtrar", on_click=apply_search)
+
+    # Tabla de datos
     table = ft.DataTable(columns=[], rows=[])
 
     def update_table():
@@ -41,11 +47,23 @@ def dashboard_view(page: ft.Page):
 
     update_table()
 
+    # Botones de navegación
+    nav_buttons = ft.Row(
+        [
+            ft.ElevatedButton("Inicio", icon=ft.icons.HOME, bgcolor="#e10600", color="white", on_click=lambda _: page.go("/")),
+            ft.ElevatedButton("Ingreso", icon=ft.icons.ADD, bgcolor="#111", color="white", on_click=lambda _: page.go("/ingreso")),
+            ft.ElevatedButton("Cargar Excel", icon=ft.icons.UPLOAD_FILE, bgcolor="#111", color="white", on_click=lambda _: page.go("/excel")),
+            ft.ElevatedButton("Atrás", icon=ft.icons.ARROW_BACK, bgcolor="#111", color="white", on_click=lambda _: page.go(page.route_history[-2] if len(page.route_history) > 1 else "/")),
+        ],
+        alignment="center",
+        spacing=20
+    )
+
     return ft.View(
         "/dashboard",
         [
             ft.Text("Dashboard", size=28, weight="bold", color="#e10600"),
-            nav_buttons(page),
+            nav_buttons,
             ft.Row([search_tf, search_btn], alignment="center"),
             table,
         ],
