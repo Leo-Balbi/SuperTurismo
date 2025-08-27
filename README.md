@@ -1,6 +1,5 @@
 # 🏎️ SuperTurismo - Sistema de Gestión de Precintos y Piezas
 
-![SuperTurismo Logo](assets/logo.png)
 
 SuperTurismo es una aplicación de escritorio/web construida con [Flet](https://flet.dev/), diseñada para el **equipo de ingenieros de competición**, con el objetivo de gestionar:
 
